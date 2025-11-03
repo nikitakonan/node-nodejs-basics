@@ -11,9 +11,10 @@ const list = async () => {
     throw new Error('FS operation failed');
   }
 
-  const files = await readdir(join(__dirname, 'files'), {
+  const dirents = await readdir(join(__dirname, 'files'), {
     withFileTypes: true,
   });
+  const files = dirents.filter((dirent) => dirent.isFile());
   for (const file of files) {
     console.log(file.name);
   }
